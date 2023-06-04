@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "281633344643",
+    "project_id": "trademade-3bdca",
+    "storage_bucket": "trademade-3bdca.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:281633344643:android:6e0dae269e16432f535fb6",
+        "android_client_info": {
+          "package_name": "com.uni.trademade"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "281633344643-h1ql5ff0vt3dr4jige823ur1etmbc366.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDaM-Bl0OYHYABuMi5sQ5ReQO9LiLbSE1A"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "281633344643-h1ql5ff0vt3dr4jige823ur1etmbc366.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
