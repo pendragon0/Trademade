@@ -26,8 +26,8 @@ class CategoriesController extends GetxController {
     try {
       QuerySnapshot querySnapshot = await FirebaseFirestore.instance
           .collection("mainCategories")
-          .doc(categories.value)
-          .collection(subCategories.value)
+          .doc("Fashion")
+          .collection("Shirt")
           .get();
 
       print("done");
@@ -40,6 +40,8 @@ class CategoriesController extends GetxController {
       // List<listOfProducts> fetchedProducts = querySnapshot.docs.map((doc) => print("${doc.data}")).toList();
       // querySnapshot.docs.forEach((element) {products.add(element);});
       products.value = fetchedProducts;
+      print("${fetchedProducts[0]}");
+      print("${products.value}");
       // print ("$fetchedProducts");
     } on FirebaseException catch (e) {
       print("************** ${e.code} ${e.message}");
