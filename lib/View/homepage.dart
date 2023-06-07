@@ -17,7 +17,7 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   @override
   void initState() {
-    print("adnjanaj");
+    print("setting state homepage");
     // TODO: implement initState
     super.initState();
   
@@ -26,8 +26,8 @@ class _HomePageState extends State<HomePage> {
       setState(() {
         name = user?.displayName;
         email = user?.email;
-        print("rafay $name");
-        print("rafay $email");
+        // print("rafay $name");
+        // print("rafay $email");
       });
       
   }

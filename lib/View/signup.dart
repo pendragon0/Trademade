@@ -9,20 +9,21 @@ import 'package:trademade/controllers/auth_controller.dart';
 import '../Const/firebase_consts.dart';
 
 class SignUpPage extends StatelessWidget {
-  
   TextEditingController emailController = TextEditingController();
   TextEditingController passController = TextEditingController();
   TextEditingController nameController = TextEditingController();
-AuthController authController = Get.put(AuthController());
+  AuthController authController = Get.put(AuthController());
 
   SignUpPage({super.key});
 
-
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(home: Scaffold(
+    return MaterialApp(
+        home: Scaffold(
       body: Container(
-        padding: EdgeInsets.symmetric(horizontal: 32,),
+        padding: EdgeInsets.symmetric(
+          horizontal: 32,
+        ),
         decoration: const BoxDecoration(
           gradient: LinearGradient(
             colors: [Color(0xFF009688), Color(0xFF00695C)],
@@ -72,7 +73,7 @@ AuthController authController = Get.put(AuthController());
                       hintText: 'Name',
                       hintStyle: TextStyle(color: Colors.white),
                       prefixIcon: Icon(
-                        Icons.phone,
+                        Icons.person_2,
                         color: Colors.white,
                       ),
                       border: InputBorder.none,
@@ -99,7 +100,7 @@ AuthController authController = Get.put(AuthController());
                       hintText: 'Email',
                       hintStyle: TextStyle(color: Colors.white),
                       prefixIcon: Icon(
-                        Icons.phone,
+                        Icons.email,
                         color: Colors.white,
                       ),
                       border: InputBorder.none,
@@ -110,42 +111,43 @@ AuthController authController = Get.put(AuthController());
               ),
               const SizedBox(height: 16.0),
               GetBuilder(
-                init: authController,
-                builder: (_) {
-                  return Container(
-                    decoration: BoxDecoration(
-                      color: Colors.white.withOpacity(0.3),
-                      borderRadius: BorderRadius.circular(8.0),
-                      border: Border.all(
-                        color: Colors.white.withOpacity(0.7),
-                        width: 1.0,
-                      ),
-                    ),
-                    child: Padding(
-                      padding: EdgeInsets.symmetric(horizontal: 16.0),
-                      child: TextFormField(
-                        controller: passController,
-                        obscureText: authController.signupHide.value,
-                        decoration: InputDecoration(
-                          hintText: 'Password',
-                          hintStyle: const TextStyle(color: Colors.white),
-                          prefixIcon: GestureDetector(
-                            onTap: () {
-                             authController.signUpHide();
-                            },
-                            child: Icon(
-                              authController.signupHide.value ? Icons.visibility_off : Icons.visibility,
-                              color: Colors.white,
-                            ),
-                          ),
-                          border: InputBorder.none,
+                  init: authController,
+                  builder: (_) {
+                    return Container(
+                      decoration: BoxDecoration(
+                        color: Colors.white.withOpacity(0.3),
+                        borderRadius: BorderRadius.circular(8.0),
+                        border: Border.all(
+                          color: Colors.white.withOpacity(0.7),
+                          width: 1.0,
                         ),
-                        style: const TextStyle(color: Colors.white),
                       ),
-                    ),
-                  );
-                }
-              ),
+                      child: Padding(
+                        padding: EdgeInsets.symmetric(horizontal: 16.0),
+                        child: TextFormField(
+                          controller: passController,
+                          obscureText: authController.signupHide.value,
+                          decoration: InputDecoration(
+                            hintText: 'Password',
+                            hintStyle: const TextStyle(color: Colors.white),
+                            prefixIcon: GestureDetector(
+                              onTap: () {
+                                authController.signUpHide();
+                              },
+                              child: Icon(
+                                authController.signupHide.value
+                                    ? Icons.visibility_off
+                                    : Icons.visibility,
+                                color: Colors.white,
+                              ),
+                            ),
+                            border: InputBorder.none,
+                          ),
+                          style: const TextStyle(color: Colors.white),
+                        ),
+                      ),
+                    );
+                  }),
               const SizedBox(height: 32.0),
               SizedBox(
                 width: double.infinity,
@@ -153,8 +155,10 @@ AuthController authController = Get.put(AuthController());
                 child: ElevatedButton(
                   onPressed: () async {
                     try {
-                      authController.signUpMethod(email: emailController.text,name: nameController.text,password: passController.text);
-                          
+                      authController.signUpMethod(
+                          email: emailController.text,
+                          name: nameController.text,
+                          password: passController.text);
                     } catch (e) {
                       auth.signOut();
                     }

@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:trademade/View/orderpage.dart';
 import './homepage.dart';
+import 'add_product_page.dart';
+import 'categories.dart';
 import 'profile_page.dart';
 
 class CustomBottomAppBar extends StatefulWidget {
@@ -26,13 +28,13 @@ class _CustomBottomAppBarState extends State<CustomBottomAppBar> {
       case 0:
         return HomePage();
       case 1:
-        return Container();
+        return Categories();
       case 2:
         return Container();
       case 3:
         return OrderPage(appLogo: 'assets/images/EC_bgimage.png');
       case 4:
-        return ProfilePage();
+        return CategoryPage();
       default:
         return Container();
     }

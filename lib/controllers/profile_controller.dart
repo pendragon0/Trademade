@@ -11,28 +11,53 @@ class ProfileController extends GetxController {
   
   TextEditingController nameController = TextEditingController();
   TextEditingController priceController = TextEditingController();
-  var category = "electronics".obs;
-  var subategory = "laptops".obs;
+  
+  TextEditingController descriptionController = TextEditingController();
 
+  var image_path = "".obs;
+  var category = "".obs;
+  var subCategory = "".obs;
+
+  selectCategory(val) {
+    category.value = val; 
+    update();
+    
+
+  }
+
+  selectsubCategory(val){
+    subCategory.value = val; 
+    update();
+    print ("ITS RUNNING");
+    
+  }
+
+  updateImagePath(val){
+    image_path.value = val;
+    update();
+  }
   addProduct() async {
+    
+  
   try {
         CollectionReference categoryCollection =
           firestore.collection("mainCategories");
-    categoryCollection.doc(category.value).collection(subategory.value).add({
+    categoryCollection.doc(category.value).collection(subCategory.value).add({
       'name': nameController.text,
       'price': priceController.text,
+      'description': descriptionController.text,
+      'imageUrl': image_path.value,
+      // 'imageURL' : imageController.imageURL;
   });  
+  print("${category.value}");
+  print("${subCategory.value}");
   print("done");
       // Get.snackbar("Success","Prodcut added successfully",borderColor: Colors.tealAccent);
   } on FirebaseException catch (e) {
         print("************** ${e.code} ${e.message}");
       // Get.snackbar("Erro","Something went wrong", borderColor: Colors.red);
   }
-    // store.set({
-    //     'name': name,
-    //     'password': password,
-    //     'email': email,
-    //   });
+   
     }
 
 }
