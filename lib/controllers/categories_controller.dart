@@ -11,7 +11,33 @@ class CategoriesController extends GetxController {
   RxList<listOfProducts> products = <listOfProducts>[].obs;
   var categories = "".obs;
   var subCategories = "".obs;
+  RxBool isLoading = false.obs;
+  void fetchProducts() async {
+    try {
+      isLoading.value = true;
+      //fetching documents/products
+      QuerySnapshot querySnapshot = await FirebaseFirestore.instance
+          .collection("mainCategories")
+          .doc(categories.value)
+          .collection(subCategories.value)
+          .get();
 
+      print("done");
+      // print("${querySnapshot.docs}");
+      //parsing data of each product and returning to list
+      List<listOfProducts> fetchedProducts = querySnapshot.docs
+          .map((doc) {
+            return  listOfProducts.fromMap(doc.data() as Map<String, dynamic>);})
+          .toList();
+      products.value = fetchedProducts;
+      print(fetchedProducts[0].name);
+      isLoading.value = false;
+      update();
+      // print("name: ${products[0].name} ");
+    } on FirebaseException catch (e) {
+      print("************** ${e.code} ${e.message}");
+    }
+  }
   selectCaregories(val) {
     categories.value = val;
     update();
@@ -20,32 +46,6 @@ class CategoriesController extends GetxController {
   selectsubCaregories(val) {
     subCategories.value = val;
     update();
-  }
-
-  void fetchProducts() async {
-    try {
-      QuerySnapshot querySnapshot = await FirebaseFirestore.instance
-          .collection("mainCategories")
-          .doc("Fashion")
-          .collection("Shirt")
-          .get();
-
-      print("done");
-      print("${querySnapshot.docs}");
-
-      List<listOfProducts> fetchedProducts = querySnapshot.docs
-          .map((doc) =>
-              listOfProducts.fromMap(doc.data() as Map<String, dynamic>))
-          .toList();
-      // List<listOfProducts> fetchedProducts = querySnapshot.docs.map((doc) => print("${doc.data}")).toList();
-      // querySnapshot.docs.forEach((element) {products.add(element);});
-      products.value = fetchedProducts;
-      print("${fetchedProducts[0]}");
-      print("${products.value}");
-      // print ("$fetchedProducts");
-    } on FirebaseException catch (e) {
-      print("************** ${e.code} ${e.message}");
-    }
   }
 }
 
@@ -65,7 +65,7 @@ class listOfProducts {
       name: map['name'],
       price: map['price'],
       description: map['description'],
-      productImageUrl: map['ImageUrl'],
+      productImageUrl: map['imageUrl'],
     );
   }
 }

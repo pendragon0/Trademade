@@ -42,6 +42,7 @@ dependencies:
   image_picker: 
   get:  
   firebase_storage: 
+  flutter_screenutil: 
 dev_dependencies:
   flutter_test:
     sdk: flutter

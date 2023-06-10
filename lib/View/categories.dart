@@ -56,7 +56,7 @@ class DisplayCategories extends StatelessWidget {
                 children: [
                   CategoryTile(
                     image: 'assets/images/electronics_image.jpeg',
-                    categoryName: 'ELECTRONICS',
+                    categoryName: 'Electronics',
                     subCategories: ['Phone', 'Headphones'],
                     subCategoryImages: [
                       'assets/images/phone_image.jpeg',
@@ -65,7 +65,7 @@ class DisplayCategories extends StatelessWidget {
                   ),
                   CategoryTile(
                     image: 'assets/images/fashion_image.jpeg',
-                    categoryName: 'FASHION',
+                    categoryName: 'Fashion',
                     subCategories: ['Shirt', 'Pant'],
                     subCategoryImages: [
                       'assets/images/shirt_image.jpeg',
@@ -180,9 +180,7 @@ class SubCategoryPage extends StatelessWidget {
         children: List.generate(subCategories.length, (index) {
           return GestureDetector(
             onTap: () {
-              categoryController.selectCaregories(category);
-              categoryController.selectsubCaregories(subCategories[index]);
-              categoryController.fetchProducts();
+              
               Navigator.push(
                   context,
                   MaterialPageRoute(
@@ -192,6 +190,9 @@ class SubCategoryPage extends StatelessWidget {
                           productInfo : categoryController.products.toString()))));
               print('Category Pressed: $category');
               print('Subcategory Pressed: ${subCategories[index]}');
+              categoryController.selectCaregories(category);
+              categoryController.selectsubCaregories(subCategories[index]);
+              categoryController.fetchProducts();
             },
             child: Container(
               margin: EdgeInsets.all(10.0),
