@@ -2,7 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:trademade/Const/colors.dart';
-import 'package:trademade/View/product_card.dart';
+
 import 'package:trademade/controllers/categories_controller.dart';
 
 class ProductDetails extends StatelessWidget {

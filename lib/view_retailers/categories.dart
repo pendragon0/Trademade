@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:trademade/View/product_details_forCategories.dart';
+
 import 'package:trademade/controllers/categories_controller.dart';
+import 'package:trademade/view_retailers/product_details_forCategories.dart';
 
 import 'bottom_app_bar.dart';
 

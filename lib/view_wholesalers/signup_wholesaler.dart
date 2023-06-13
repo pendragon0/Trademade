@@ -2,19 +2,20 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:trademade/View/homepage.dart';
-import 'package:trademade/View/signin.dart';
 import 'package:trademade/controllers/auth_controller.dart';
+import 'package:trademade/view_retailers/signin.dart';
+import 'package:trademade/view_wholesalers/signin_wholesaler.dart';
+import 'package:trademade/view_wholesalers/wholesalers_homepage.dart';
 // import 'package:velocity_x/velocity_x.dart';
 import '../Const/firebase_consts.dart';
 
-class SignUpPage extends StatelessWidget {
+class SignUpPageWholeSaler extends StatelessWidget {
   TextEditingController emailController = TextEditingController();
   TextEditingController passController = TextEditingController();
   TextEditingController nameController = TextEditingController();
   AuthController authController = Get.put(AuthController());
 
-  SignUpPage({super.key});
+  SignUpPageWholeSaler({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -67,6 +68,8 @@ class SignUpPage extends StatelessWidget {
                 ),
                 child: Padding(
                   padding: EdgeInsets.symmetric(horizontal: 16.0),
+
+                  //name field
                   child: TextFormField(
                     controller: nameController,
                     decoration: const InputDecoration(
@@ -94,6 +97,8 @@ class SignUpPage extends StatelessWidget {
                 ),
                 child: Padding(
                   padding: EdgeInsets.symmetric(horizontal: 16.0),
+
+                  //email field
                   child: TextFormField(
                     controller: emailController,
                     decoration: const InputDecoration(
@@ -124,6 +129,8 @@ class SignUpPage extends StatelessWidget {
                       ),
                       child: Padding(
                         padding: EdgeInsets.symmetric(horizontal: 16.0),
+
+                        //password field
                         child: TextFormField(
                           controller: passController,
                           obscureText: authController.signupHide.value,
@@ -152,6 +159,8 @@ class SignUpPage extends StatelessWidget {
               SizedBox(
                 width: double.infinity,
                 height: 48.0,
+
+                //sign up button
                 child: ElevatedButton(
                   onPressed: () async {
                     try {
@@ -159,6 +168,9 @@ class SignUpPage extends StatelessWidget {
                           email: emailController.text,
                           name: nameController.text,
                           password: passController.text);
+                      if(authController.loggedIn = true){
+                        Get.offAll(homepageWholesaler());
+                      }    
                     } catch (e) {
                       auth.signOut();
                     }
@@ -190,7 +202,7 @@ class SignUpPage extends StatelessWidget {
                         Navigator.push(
                             context,
                             MaterialPageRoute(
-                                builder: (context) => SignInPage()));
+                                builder: (context) => SignInPageWholeSaler()));
                       },
                       child: const Text("Sign In"))
                 ],

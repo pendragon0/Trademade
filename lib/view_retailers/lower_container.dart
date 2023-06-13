@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:trademade/View/product_card.dart';
+
+import 'package:trademade/view_retailers/product_card.dart';
 
 class LowerContainer extends StatelessWidget {
   @override

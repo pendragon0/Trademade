@@ -4,13 +4,14 @@ import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:trademade/View/homepage.dart';
 import 'package:trademade/controllers/profile_controller.dart';
 
-import 'bottom_app_bar.dart';
-import 'cart.dart';
-import 'how_it_works.dart';
-import 'who_are_we.dart';
+import '../view_retailers/homepage.dart';
+
+// import 'bottom_app_bar.dart';
+// import 'cart.dart';
+// import 'how_it_works.dart';
+// import 'who_are_we.dart';
 
 class AddProductPage extends StatefulWidget {
   final Category category;
@@ -252,7 +253,7 @@ class _AddProductPageState extends State<AddProductPage> {
           ),
         ),
       ),
-      bottomNavigationBar: const CustomBottomAppBar(currentIndex: 4),
+      // bottomNavigationBar: const CustomBottomAppBar(currentIndex: 4),
     );
   }
 }
@@ -268,76 +269,76 @@ class CategoryPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-       endDrawer: Drawer(
-        child: ListView(
-          children: [
-            const DrawerHeader(
-              decoration: BoxDecoration(
-                color: Color(0xFF3C8589),
-              ),
-              child: Text(
-                ' ',
-                style: TextStyle(
-                  color: Colors.white,
-                  fontSize: 24,
-                ),
-              ),
-            ),
-            ListTile(
-              title: const Text('HOME'),
-              onTap: () {
-                // Handle HOME button tap
-              },
-            ),
-            ListTile(
-              title: const Text('CATEGORIES'),
-              onTap: () {
-                // Handle CATEGORIES button tap
-              },
-            ),
-            ListTile(
-              title: const Text('CART'),
-              onTap: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => cart()),
-                );
-              },
-            ),
-            ListTile(
-              title: const Text('PROFILE'),
-              onTap: () {
-                // Handle PROFILE button tap
-              },
-            ),
-            ListTile(
-              title: const Text('WHO ARE WE'),
-              onTap: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => WhoWeArePage()),
-                );
-              },
-            ),
-            ListTile(
-              title: const Text('HOW IT WORKS'),
-              onTap: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => HowItWorks()),
-                );
-              },
-            ),
-            ListTile(
-              title: const Text('Logout'),
-              onTap: () {
-                // Handle Logout button tap
-              },
-            ),
-          ],
-        ),
-      ),
-      bottomNavigationBar: const CustomBottomAppBar(currentIndex: 4),
+      //  endDrawer: Drawer(
+      //   child: ListView(
+      //     children: [
+      //       const DrawerHeader(
+      //         decoration: BoxDecoration(
+      //           color: Color(0xFF3C8589),
+      //         ),
+      //         child: Text(
+      //           ' ',
+      //           style: TextStyle(
+      //             color: Colors.white,
+      //             fontSize: 24,
+      //           ),
+      //         ),
+      //       ),
+      //       ListTile(
+      //         title: const Text('HOME'),
+      //         onTap: () {
+      //           // Handle HOME button tap
+      //         },
+      //       ),
+      //       ListTile(
+      //         title: const Text('CATEGORIES'),
+      //         onTap: () {
+      //           // Handle CATEGORIES button tap
+      //         },
+      //       ),
+      //       ListTile(
+      //         title: const Text('CART'),
+      //         onTap: () {
+      //           Navigator.push(
+      //             context,
+      //             MaterialPageRoute(builder: (context) => cart()),
+      //           );
+      //         },
+      //       ),
+      //       ListTile(
+      //         title: const Text('PROFILE'),
+      //         onTap: () {
+      //           // Handle PROFILE button tap
+      //         },
+      //       ),
+      //       ListTile(
+      //         title: const Text('WHO ARE WE'),
+      //         onTap: () {
+      //           Navigator.push(
+      //             context,
+      //             MaterialPageRoute(builder: (context) => WhoWeArePage()),
+      //           );
+      //         },
+      //       ),
+      //       ListTile(
+      //         title: const Text('HOW IT WORKS'),
+      //         onTap: () {
+      //           Navigator.push(
+      //             context,
+      //             MaterialPageRoute(builder: (context) => HowItWorks()),
+      //           );
+      //         },
+      //       ),
+      //       ListTile(
+      //         title: const Text('Logout'),
+      //         onTap: () {
+      //           // Handle Logout button tap
+      //         },
+      //       ),
+      //     ],
+      //   ),
+      // ),
+      // bottomNavigationBar: const CustomBottomAppBar(currentIndex: 4),
       appBar: AppBar(
         backgroundColor: Colors.teal,
         leading: IconButton(
@@ -419,7 +420,7 @@ class SubCategoryPage extends StatelessWidget {
             : [];
 
     return Scaffold(
-      bottomNavigationBar: const CustomBottomAppBar(currentIndex: 4),
+      // bottomNavigationBar: const CustomBottomAppBar(currentIndex: 4),
       appBar: AppBar(
         backgroundColor: Colors.teal,
         leading: IconButton(

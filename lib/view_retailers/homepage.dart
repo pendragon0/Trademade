@@ -1,11 +1,13 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:trademade/View/bottom_app_bar.dart';
-import 'package:trademade/View/cart.dart';
-import 'package:trademade/View/how_it_works.dart';
-import 'package:trademade/View/lower_container.dart';
-import 'package:trademade/View/upper_container.dart';
-import 'package:trademade/View/who_are_we.dart';
+import 'package:trademade/view_retailers/upper_container.dart';
+import 'package:trademade/view_retailers/who_are_we.dart';
+
+
+import 'bottom_app_bar.dart';
+import 'cart.dart';
+import 'how_it_works.dart';
+import 'lower_container.dart';
 
 class HomePage extends StatefulWidget {
   HomePage({super.key});

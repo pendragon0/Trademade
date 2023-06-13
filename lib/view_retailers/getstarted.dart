@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:trademade/View/homepage.dart';
+
+
+import 'homepage.dart';
 class GetStarted extends StatelessWidget {
   @override
   Widget build(BuildContext context) {

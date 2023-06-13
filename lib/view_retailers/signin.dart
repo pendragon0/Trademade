@@ -1,9 +1,11 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:trademade/View/homepage.dart';
-import 'package:trademade/View/signup.dart';
 import 'package:trademade/controllers/auth_controller.dart';
+import 'package:trademade/view_retailers/signup.dart';
+import 'package:trademade/view_wholesalers/wholesalers_homepage.dart';
+
+import 'homepage.dart';
 
 class SignInPage extends StatefulWidget {
    SignInPage({super.key});
@@ -17,20 +19,6 @@ class _SignInPageState extends State<SignInPage> {
  TextEditingController emailController = TextEditingController();
  TextEditingController passController = TextEditingController();
   AuthController authController = Get.put(AuthController());
-//   void login() async{
-//     try {
-//   final credential = await FirebaseAuth.instance.signInWithEmailAndPassword(
-//     email: emailController.text, password: passController.text,
-//   );
-// } on FirebaseAuthException catch (e) {
-//   if (e.code == 'user-not-found') {
-//     print('No user found for that email.');
-//   } else if (e.code == 'wrong-password') {
-//     print('Wrong password provided for that user.');
-//   }
-// }
-//   }
-
 //   bool isHide = true;
 
   @override
@@ -85,6 +73,8 @@ class _SignInPageState extends State<SignInPage> {
                     ),
                     child: Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 16.0),
+
+                      //email text
                       child: TextFormField(
                         controller: emailController,
                         decoration: const InputDecoration(
@@ -115,6 +105,8 @@ class _SignInPageState extends State<SignInPage> {
                         ),
                         child: Padding(
                           padding: const EdgeInsets.symmetric(horizontal: 16.0),
+
+                          //password text
                           child: TextFormField(
                         controller: passController,
 
@@ -144,9 +136,14 @@ class _SignInPageState extends State<SignInPage> {
                   SizedBox(
                     width: double.infinity,
                     height: 48.0,
+
+                    //sign in button
                     child: ElevatedButton(
                       onPressed: () {
                      authController.loginMethod(email: emailController.text,password: passController.text);
+                     if(authController.loggedIn= false){
+                      Get.offAll(HomePage());
+                     }
                       },
                       style: ElevatedButton.styleFrom(
                         backgroundColor: Colors.white,
@@ -156,6 +153,8 @@ class _SignInPageState extends State<SignInPage> {
                         ),
                         elevation: 4.0,
                       ),
+
+                    
                       child: const Text(
                         'Sign In',
                         style: TextStyle(

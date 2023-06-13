@@ -1,14 +1,11 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:trademade/View/homepage.dart';
-import 'package:trademade/View/profile_page.dart';
-import 'package:trademade/View/signin.dart';
-import 'package:trademade/View/signup.dart';
-import 'package:trademade/View/sliderscreen.dart';
 import 'package:trademade/controllers/categories_controller.dart';
+import 'package:trademade/user_type.dart';
+import 'package:trademade/view_retailers/signin.dart';
+import 'package:trademade/view_wholesalers/wholesalers_homepage.dart';
 
-import 'View/add_product_page.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -28,7 +25,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: HomePage(),
+      home: userType(),
     );
   }
 }
