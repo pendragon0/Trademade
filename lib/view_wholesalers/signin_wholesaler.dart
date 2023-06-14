@@ -1,3 +1,5 @@
+// ignore_for_file: unused_import
+
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -7,16 +9,15 @@ import 'package:trademade/view_retailers/signup.dart';
 import 'package:trademade/view_wholesalers/wholesalers_homepage.dart';
 
 class SignInPageWholeSaler extends StatefulWidget {
-   SignInPageWholeSaler({super.key});
+  SignInPageWholeSaler({super.key});
 
   @override
   State<SignInPageWholeSaler> createState() => _SignInPageState();
 }
 
-
 class _SignInPageState extends State<SignInPageWholeSaler> {
- TextEditingController emailController = TextEditingController();
- TextEditingController passController = TextEditingController();
+  TextEditingController emailController = TextEditingController();
+  TextEditingController passController = TextEditingController();
   AuthController authController = Get.put(AuthController());
 
   @override
@@ -90,46 +91,47 @@ class _SignInPageState extends State<SignInPageWholeSaler> {
                   ),
                   const SizedBox(height: 16.0),
                   GetBuilder(
-                    init: authController,
-                    builder: (_) {
-                      return Container(
-                        decoration: BoxDecoration(
-                          color: Colors.white.withOpacity(0.3),
-                          borderRadius: BorderRadius.circular(8.0),
-                          border: Border.all(
-                            color: Colors.white.withOpacity(0.7),
-                            width: 1.0,
-                          ),
-                        ),
-                        child: Padding(
-                          padding: const EdgeInsets.symmetric(horizontal: 16.0),
-
-                          //password text
-                          child: TextFormField(
-                        controller: passController,
-
-                            // obscureText:  isHide,
-                            decoration:  InputDecoration(
-                              hintText: 'Password',
-                              hintStyle: const TextStyle(color: Colors.white),
-                              prefixIcon: GestureDetector(
-                                onTap: (){
-                                  authController.signInHide();
-                                },
-                                child: Icon(
-                                  authController.signinHide.value?
-                                    Icons.visibility_off:Icons.visibility,
-                                  color: Colors.white,
-                                ),
-                              ),
-                              border: InputBorder.none,
+                      init: authController,
+                      builder: (_) {
+                        return Container(
+                          decoration: BoxDecoration(
+                            color: Colors.white.withOpacity(0.3),
+                            borderRadius: BorderRadius.circular(8.0),
+                            border: Border.all(
+                              color: Colors.white.withOpacity(0.7),
+                              width: 1.0,
                             ),
-                            style: const TextStyle(color: Colors.white),
                           ),
-                        ),
-                      );
-                    }
-                  ),
+                          child: Padding(
+                            padding:
+                                const EdgeInsets.symmetric(horizontal: 16.0),
+
+                            //password text
+                            child: TextFormField(
+                              controller: passController,
+
+                              // obscureText:  isHide,
+                              decoration: InputDecoration(
+                                hintText: 'Password',
+                                hintStyle: const TextStyle(color: Colors.white),
+                                prefixIcon: GestureDetector(
+                                  onTap: () {
+                                    authController.signInHide();
+                                  },
+                                  child: Icon(
+                                    authController.signinHide.value
+                                        ? Icons.visibility_off
+                                        : Icons.visibility,
+                                    color: Colors.white,
+                                  ),
+                                ),
+                                border: InputBorder.none,
+                              ),
+                              style: const TextStyle(color: Colors.white),
+                            ),
+                          ),
+                        );
+                      }),
                   const SizedBox(height: 32.0),
                   SizedBox(
                     width: double.infinity,
@@ -138,10 +140,12 @@ class _SignInPageState extends State<SignInPageWholeSaler> {
                     //sign in button
                     child: ElevatedButton(
                       onPressed: () {
-                     authController.loginMethod(email: emailController.text,password: passController.text);
-                     if (authController.loggedIn = true){
-                      Get.offAll(homepageWholesaler());
-                     }
+                        authController.loginMethod(
+                            email: emailController.text,
+                            password: passController.text);
+                        if (authController.loggedIn = true) {
+                          Get.offAll(homepageWholesaler());
+                        }
                       },
                       style: ElevatedButton.styleFrom(
                         backgroundColor: Colors.white,
@@ -151,8 +155,6 @@ class _SignInPageState extends State<SignInPageWholeSaler> {
                         ),
                         elevation: 4.0,
                       ),
-
-                    
                       child: const Text(
                         'Sign In',
                         style: TextStyle(
@@ -162,14 +164,22 @@ class _SignInPageState extends State<SignInPageWholeSaler> {
                       ),
                     ),
                   ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Text("Don't have an account? "),
-                    TextButton(onPressed: (){
-                      Navigator.push(context, MaterialPageRoute(builder: (context)=> SignUpPage(),),);
-                    }, child: Text("Sign Up"))
-                  ],)
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Text("Don't have an account? "),
+                      TextButton(
+                          onPressed: () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => SignUpPage(),
+                              ),
+                            );
+                          },
+                          child: Text("Sign Up"))
+                    ],
+                  )
                 ],
               ),
             ),

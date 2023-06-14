@@ -1,3 +1,5 @@
+// ignore_for_file: must_be_immutable
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -79,7 +81,7 @@ class DisplayCategories extends StatelessWidget {
           ],
         ),
       ),
-      bottomNavigationBar: const CustomBottomAppBar(currentIndex: 4),
+      bottomNavigationBar: const CustomBottomAppBar(currentIndex: 1),
     );
   }
 }
@@ -167,7 +169,8 @@ class SubCategoryPage extends StatelessWidget {
       {required this.category,
       required this.subCategories,
       required this.subCategoryImages});
-  late CategoriesController categoryController = Get.put(CategoriesController());
+  late CategoriesController categoryController =
+      Get.put(CategoriesController());
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -181,14 +184,14 @@ class SubCategoryPage extends StatelessWidget {
         children: List.generate(subCategories.length, (index) {
           return GestureDetector(
             onTap: () {
-              
               Navigator.push(
                   context,
                   MaterialPageRoute(
                       builder: ((context) => ProductDetails(
                           category: category,
                           subCategory: subCategories[index],
-                          productInfo : categoryController.products.toString()))));
+                          productInfo:
+                              categoryController.products.toString()))));
               print('Category Pressed: $category');
               print('Subcategory Pressed: ${subCategories[index]}');
               categoryController.selectCaregories(category);

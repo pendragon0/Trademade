@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:trademade/view_retailers/cart.dart';
+import 'package:trademade/view_retailers/profile_page.dart';
 
 import './homepage.dart';
-import 'add_product_page.dart';
 import 'categories.dart';
 import 'orderpage.dart';
-import 'profile_page.dart';
 
 class CustomBottomAppBar extends StatefulWidget {
   final int currentIndex;
@@ -31,11 +31,11 @@ class _CustomBottomAppBarState extends State<CustomBottomAppBar> {
       case 1:
         return Categories();
       case 2:
-        return Container();
+        return CartPage();
       case 3:
-        return OrderPage(appLogo: 'assets/images/EC_bgimage.png');
+        return OrderPage();
       case 4:
-        return Container();
+        return RetailerProfilePage();
       default:
         return Container();
     }

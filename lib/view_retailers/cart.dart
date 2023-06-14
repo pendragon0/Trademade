@@ -1,117 +1,123 @@
 import 'package:flutter/material.dart';
-
-
-class cart extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Cart Page',
-      theme: ThemeData(
-        primaryColor: Colors.teal,
-        scaffoldBackgroundColor: Colors.white,
-      ),
-      home: CartPage(),
-    );
-  }
-}
+import 'package:get/get.dart';
+import '../Models/product_model.dart';
+import '../controllers/cartstate_controller.dart';
+import 'bottom_app_bar.dart';
 
 class CartPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    CartController cartController = Get.put(CartController());
+
     return Scaffold(
       appBar: AppBar(
         title: const Text('Cart'),
         backgroundColor: Colors.teal,
-        elevation: 0, // Remove the shadow from the app bar
+        elevation: 0,
       ),
-      body: Column(
-        crossAxisAlignment: CrossAxisAlignment.stretch,
-        children: [
-          Expanded(
-            child: ListView(
-              padding: const EdgeInsets.symmetric(horizontal: 16.0),
-              children: [
-                // Cart Items List
-                Card(
-                  elevation: 4, // Add a subtle shadow to the card
-                  child: ListTile(
-                    leading: Image.asset('assets/images/1.jpg'),
-                    title: const Text(
-                      'Berluti X',
-                      style: TextStyle(
-                        fontSize: 16.0,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                    subtitle: Text('Price: \$10.00'),
-                    trailing: IconButton(
-                      icon: const Icon(Icons.delete),
-                      onPressed: () {
-                        // Remove item from cart
+      body: Obx(
+        () => cartController.cartItems.isEmpty
+            ? Center(
+                child: Text(
+                  'Cart is empty',
+                  style: TextStyle(fontSize: 18.0),
+                ),
+              )
+            : Column(
+                crossAxisAlignment: CrossAxisAlignment.stretch,
+                children: [
+                  Expanded(
+                    child: ListView.builder(
+                      itemCount: cartController.cartItems.length,
+                      itemBuilder: (context, index) {
+                        Product product = cartController.cartItems[index];
+
+                        return Card(
+                          elevation: 4,
+                          child: ListTile(
+                            leading: Image.network(product.imageUrl),
+                            title: Text(
+                              product.name,
+                              style: const TextStyle(
+                                fontSize: 16.0,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                            subtitle: Text("${product.price} pkr"),
+                            trailing: Row(
+                              mainAxisSize: MainAxisSize.min,
+                              children: [
+                                IconButton(
+                                  icon: const Icon(Icons.remove),
+                                  onPressed: () {
+                                    // Decrease the quantity
+                                    cartController.decreaseQuantity(product);
+                                  },
+                                ),
+                                Text(
+                                  '${product.quantity}',
+                                  style: const TextStyle(fontSize: 16.0),
+                                ),
+                                IconButton(
+                                  icon: const Icon(Icons.add),
+                                  onPressed: () {
+                                    // Increase the quantity
+                                    cartController.increaseQuantity(product);
+                                  },
+                                ),
+                                IconButton(
+                                  icon: const Icon(Icons.delete),
+                                  onPressed: () {
+                                    // Remove item from cart
+                                    cartController.removeFromCart(product);
+                                  },
+                                ),
+                              ],
+                            ),
+                          ),
+                        );
                       },
                     ),
                   ),
-                ),
-                Card(
-                  elevation: 4,
-                  child: ListTile(
-                    leading: Image.asset('assets/images/2.jpg'),
-                    title: const Text(
-                      'Berluti',
-                      style: TextStyle(
-                        fontSize: 16.0,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                    subtitle: const Text('Price: \$15.00'),
-                    trailing: IconButton(
-                      icon: const Icon(Icons.delete),
-                      onPressed: () {
-                        // Remove item from cart
-                      },
-                    ),
-                  ),
-                ),
-                // Add more cart items as needed
-              ],
-            ),
-          ),
-          Container(
-            padding: const EdgeInsets.all(16.0),
-            color: Colors.teal,
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                // Total Price Calculation
-                const Text(
-                  'Total: \$25.00',
-                  style: TextStyle(
-                    color: Colors.white,
-                    fontWeight: FontWeight.bold,
-                    fontSize: 16.0,
-                  ),
-                ),
-                // Checkout Button
-                ElevatedButton(
-                  onPressed: () {
-                    // Proceed to checkout
-                  },
-                  style: ElevatedButton.styleFrom(
-                    primary: Colors.white,
-                  ),
-                  child:const Text(
-                    'Checkout',
-                    style: TextStyle(
-                      color: Colors.teal,
-                      fontWeight: FontWeight.bold,
+                  Container(
+                    padding: const EdgeInsets.all(16.0),
+                    color: Colors.teal,
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Obx(
+                          () => Text(
+                            'Total: ${cartController.calculateTotalPrice()} pkr',
+                            style: const TextStyle(
+                              color: Colors.white,
+                              fontWeight: FontWeight.bold,
+                              fontSize: 16.0,
+                            ),
+                          ),
+                        ),
+                        ElevatedButton(
+                          onPressed: () {
+                            // Proceed to checkout
+                            cartController.checkout();
+                          },
+                          style: ElevatedButton.styleFrom(
+                            primary: Colors.white,
+                          ),
+                          child: const Text(
+                            'Checkout',
+                            style: TextStyle(
+                              color: Colors.teal,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                        ),
+                      ],
                     ),
                   ),
-                ),
-              ],
-            ),
-          ),
-        ],
+                ],
+              ),
       ),
+      bottomNavigationBar: const CustomBottomAppBar(currentIndex: 2),
     );
   }
 }

@@ -1,3 +1,5 @@
+// ignore_for_file: unnecessary_null_comparison, unused_local_variable
+
 import 'dart:io';
 
 import 'package:firebase_storage/firebase_storage.dart';
@@ -5,8 +7,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:trademade/controllers/profile_controller.dart';
-
-import '../view_retailers/homepage.dart';
+import 'package:trademade/view_wholesalers/wholesalers_homepage.dart';
 
 // import 'bottom_app_bar.dart';
 // import 'cart.dart';
@@ -344,7 +345,7 @@ class CategoryPage extends StatelessWidget {
         leading: IconButton(
           icon: const Icon(Icons.close),
           onPressed: () {
-            Navigator.pop(HomePage() as BuildContext);
+            Get.offAll(homepageWholesaler());
           },
         ),
         title: const Text('What are you selling?'),

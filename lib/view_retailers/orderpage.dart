@@ -1,12 +1,10 @@
+// ignore_for_file: unused_import
+
 import 'package:flutter/material.dart';
 import './bottom_app_bar.dart';
 import './homepage.dart';
 
 class OrderPage extends StatefulWidget {
-  final String appLogo;
-
-  OrderPage({required this.appLogo});
-
   @override
   _OrderPageState createState() => _OrderPageState();
 }
@@ -43,7 +41,8 @@ class _OrderPageState extends State<OrderPage> {
             const SizedBox(height: 40),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 16),
-              child: Image.asset(widget.appLogo, height: 80),
+              child:
+                  Image.asset("assets/images/trademade_logo.png", height: 80),
             ),
             const SizedBox(height: 16),
             Row(
@@ -172,24 +171,6 @@ class OrderDeliveredScreen extends StatelessWidget {
           ),
         ],
       ),
-    );
-  }
-}
-
-void main() {
-  runApp(MyApp());
-}
-
-class MyApp extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Order Page',
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
-      ),
-      home: OrderPage(
-          appLogo: 'assets/images/EC.png'), // Replace with your app logo asset path
     );
   }
 }

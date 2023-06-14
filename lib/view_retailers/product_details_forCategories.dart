@@ -1,9 +1,14 @@
+// ignore_for_file: unused_import, must_be_immutable
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:trademade/Const/colors.dart';
 
 import 'package:trademade/controllers/categories_controller.dart';
+import 'package:trademade/view_retailers/product_description_page.dart';
+
+import 'bottom_app_bar.dart';
 
 class ProductDetails extends StatelessWidget {
   final String category;
@@ -45,55 +50,71 @@ class ProductDetails extends StatelessWidget {
                                   mainAxisSpacing: 20,
                                   crossAxisSpacing: 15),
                           itemBuilder: (context, index) {
-                            return Container(
-                              padding: EdgeInsets.symmetric(
-                                  horizontal: 10, vertical: 10),
-                              decoration: BoxDecoration(
-                                  color: white,
-                                  borderRadius: BorderRadius.circular(10),
-                                  boxShadow: [
-                                    BoxShadow(
-                                      color: grey.withOpacity(0.3),
-                                      spreadRadius: 1,
-                                      blurRadius: 4,
-                                    )
-                                  ]),
-                              child: Column(
-                                children: [
-                                  Expanded(
-                                    flex: 5,
-                                    child: ClipRRect(
+                            //show product button
+                            return InkWell(
+                                onTap: () {
+                                  _handleImageTap(context, index);
+                                },
+                                child: Container(
+                                  padding: EdgeInsets.symmetric(
+                                      horizontal: 10, vertical: 10),
+                                  decoration: BoxDecoration(
+                                      color: white,
                                       borderRadius: BorderRadius.circular(10),
-                                      child: Image.network(
-                                        controller
-                                            .products[index].productImageUrl,
-                                        fit: BoxFit.cover,
+                                      boxShadow: [
+                                        BoxShadow(
+                                          color: grey.withOpacity(0.3),
+                                          spreadRadius: 1,
+                                          blurRadius: 4,
+                                        )
+                                      ]),
+                                  child: Column(
+                                    children: [
+                                      Expanded(
+                                        flex: 5,
+                                        child: ClipRRect(
+                                          borderRadius:
+                                              BorderRadius.circular(10),
+                                          child: Image.network(
+                                            controller.products[index]
+                                                .productImageUrl,
+                                            fit: BoxFit.cover,
+                                            height: MediaQuery.of(context)
+                                                    .size
+                                                    .height *
+                                                0.15,
+                                            width: MediaQuery.of(context)
+                                                    .size
+                                                    .width *
+                                                0.4,
+                                          ),
+                                        ),
+                                      ),
+                                      SizedBox(
                                         height:
                                             MediaQuery.of(context).size.height *
-                                                0.15,
-                                        width:
-                                            MediaQuery.of(context).size.width *
-                                                0.4,
+                                                0.01,
                                       ),
-                                    ),
+                                      Expanded(
+                                          flex: 2,
+                                          child: Column(
+                                            children: [
+                                              Text(controller
+                                                  .products[index].name),
+                                              SizedBox(
+                                                height: MediaQuery.of(context)
+                                                        .size
+                                                        .height *
+                                                    0.01,
+                                              ),
+                                              Text(controller
+                                                  .products[index].price
+                                                  .toString())
+                                            ],
+                                          )),
+                                    ],
                                   ),
-                                  SizedBox(height: MediaQuery.of(context).size.height*0.01,),
-                                  Expanded(
-                                    flex: 2,
-                                      child: Column(
-                                        children: [
-                                          Text(
-                                              controller.products[index].name),
-                                  SizedBox(height: MediaQuery.of(context).size.height*0.01,),
-
-                                              Text(
-                                          controller.products[index].price.toString())
-                                        ],
-                                      )),
-                                         
-                                ],
-                              ),
-                            );
+                                ));
                           },
                         )
                       : Center(child: CircularProgressIndicator.adaptive());
@@ -115,6 +136,17 @@ class ProductDetails extends StatelessWidget {
           // ),
         ],
       ),
+      bottomNavigationBar: const CustomBottomAppBar(currentIndex: 1),
     );
+  }
+
+  void _handleImageTap(BuildContext context, int index) {
+    final product = controller.products[index];
+    Get.offAll(ProductDescriptionPage(
+      name: product.name,
+      price: product.price,
+      description: product.description,
+      imageUrl: product.productImageUrl,
+    ));
   }
 }

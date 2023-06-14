@@ -1,17 +1,14 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:trademade/view_wholesalers/wholesalers_homepage.dart';
 // import 'package:velocity_x/velocity_x.dart';
 
 import '../Const/firebase_consts.dart';
-import '../Models/utilitu_model.dart';
 
 class AuthController extends GetxController {
   var signupHide = true.obs;
   var signinHide = true.obs;
-  late bool loggedIn; 
+  late bool loggedIn;
+  late bool signedOut;
   signUpHide() {
     signupHide.value = !signupHide.value;
     update();
@@ -32,11 +29,13 @@ class AuthController extends GetxController {
       loggedIn = true;
       //     String? emailValidator(String? emai) {
       //   return Utils.validator(email);
-      
+
       // }
       // Get.offAll(homepageWholesaler());
+      print("${userCredential}");
     } on FirebaseAuthException catch (e) {
-    loggedIn = false;
+      loggedIn = false;
+
       print("${e.message}");
       Get.snackbar("Error", "Credentials are incorrect");
     }
@@ -50,19 +49,17 @@ class AuthController extends GetxController {
           email: email, password: password);
 
       loggedIn = true;
-    // if (emailValidation == "Please enter a valid email address"){
-    //   Get.snackbar("Validation Error", "Please enter a valid email address");
-    // } else{ 
-    // }
-      
+      // if (emailValidation == "Please enter a valid email address"){
+      //   Get.snackbar("Validation Error", "Please enter a valid email address");
+      // } else{
+      // }
 
       userCredential.user?.updateDisplayName(name.trim());
       userCredential.user?.updateEmail(email.trim());
       userCredential.user?.updatePhotoURL(
           "https://t3.ftcdn.net/jpg/05/79/55/26/360_F_579552668_sZD51Sjmi89GhGqyF27pZcrqyi7cEYBH.jpg");
-      
     } on FirebaseAuthException catch (e) {
-      Get.snackbar("Error", "Credentials are invalid");
+      Get.snackbar("Error", "$e Credentials are invalid");
       loggedIn = false;
     }
   }
@@ -78,11 +75,12 @@ class AuthController extends GetxController {
   //     });
   //   }
 
-  // signOutMethod(context) async {
-  //   try {
-  //     await auth.signOut();
-  //   } catch (e) {
-  //     // VxToast.show(context, msg: e.toString());
-  //   }
-  // }
+  signOutMethod() async {
+    try {
+      await auth.signOut();
+      signedOut = true;
+    } catch (e) {
+      // VxToast.show(context, msg: e.toString());
+    }
+  }
 }

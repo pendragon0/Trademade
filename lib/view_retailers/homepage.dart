@@ -3,9 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:trademade/view_retailers/upper_container.dart';
 import 'package:trademade/view_retailers/who_are_we.dart';
 
-
 import 'bottom_app_bar.dart';
-import 'cart.dart';
+// import 'cart.dart';
 import 'how_it_works.dart';
 import 'lower_container.dart';
 
@@ -22,16 +21,15 @@ class _HomePageState extends State<HomePage> {
     print("setting state homepage");
     // TODO: implement initState
     super.initState();
-  
-      var user = FirebaseAuth.instance.currentUser;
 
-      setState(() {
-        name = user?.displayName;
-        email = user?.email;
-        // print("rafay $name");
-        // print("rafay $email");
-      });
-      
+    var user = FirebaseAuth.instance.currentUser;
+
+    setState(() {
+      name = user?.displayName;
+      email = user?.email;
+      // print("rafay $name");
+      // print("rafay $email");
+    });
   }
 
   String? name = "";
@@ -139,10 +137,10 @@ class _HomePageState extends State<HomePage> {
             ListTile(
               title: const Text('CART'),
               onTap: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => cart()),
-                );
+                // Navigator.push(
+                //   context,
+                //   MaterialPageRoute(builder: (context) => Cart()),
+                // );
               },
             ),
             ListTile(

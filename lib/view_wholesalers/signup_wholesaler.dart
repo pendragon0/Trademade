@@ -1,3 +1,5 @@
+// ignore_for_file: unused_import, must_be_immutable
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -168,9 +170,9 @@ class SignUpPageWholeSaler extends StatelessWidget {
                           email: emailController.text,
                           name: nameController.text,
                           password: passController.text);
-                      if(authController.loggedIn = true){
+                      if (authController.loggedIn = true) {
                         Get.offAll(homepageWholesaler());
-                      }    
+                      }
                     } catch (e) {
                       auth.signOut();
                     }

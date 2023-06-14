@@ -1,10 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 // import 'package:velocity_x/velocity_x.dart';
-
-import '../Const/firebase_consts.dart';
 
 class CategoriesController extends GetxController {
   RxList<listOfProducts> products = <listOfProducts>[].obs;
@@ -24,10 +21,9 @@ class CategoriesController extends GetxController {
       print("done");
       // print("${querySnapshot.docs}");
       //parsing data of each product and returning to list
-      List<listOfProducts> fetchedProducts = querySnapshot.docs
-          .map((doc) {
-            return  listOfProducts.fromMap(doc.data() as Map<String, dynamic>);})
-          .toList();
+      List<listOfProducts> fetchedProducts = querySnapshot.docs.map((doc) {
+        return listOfProducts.fromMap(doc.data() as Map<String, dynamic>);
+      }).toList();
       products.value = fetchedProducts;
       print(fetchedProducts[0].name);
       isLoading.value = false;
@@ -37,6 +33,7 @@ class CategoriesController extends GetxController {
       print("************** ${e.code} ${e.message}");
     }
   }
+
   selectCaregories(val) {
     categories.value = val;
     update();
